@@ -50,11 +50,11 @@ services:
         timeout client 600000
         timeout server 600000
         option forwardfor header X-Real-IP
-        port_rules:
-        - priority: 1
-          protocol: http
-          service: wordpress
-          source_port: ${public_port}
-          target_port: 80
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: wordpress
+        source_port: ${public_port}
+        target_port: 80
   wordpress:
     scale: 1
