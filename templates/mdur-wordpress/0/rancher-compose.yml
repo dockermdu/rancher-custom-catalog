@@ -18,9 +18,9 @@
       default: "pxd"
       type: "string"
 
+version: '2'
 services:
   db:
-    scale: 1
     health_check:
       healthy_threshold: 2
       response_timeout: 2000
@@ -43,7 +43,5 @@ services:
       - priority: 1
         protocol: http
         service: wordpress
-        source_port: ${public_port}
+        source_port: 8001
         target_port: 80
-  wordpress:
-    scale: 1

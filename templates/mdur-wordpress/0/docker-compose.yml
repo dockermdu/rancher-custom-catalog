@@ -1,23 +1,25 @@
 version: '2'
 services:
   wordpress:
-    image: wordpress
-    links:
-      - db:mysql
+    image: 'wpregistry.mdu.com/mdur-wordpress:w4.8v3'
+    depends_on:
+      - db
     volumes:
-      - data:/var/www/html
+      - 'data:/var/www/html'
   db:
-    image: mariadb
+    image: 'mariadb'
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
-      - db:/var/lib/mysql
+      - 'db:/var/lib/mysql'
   lb:
-    image: rancher/lb-service-haproxy
+    image: 'rancher/lb-service-haproxy'
     ports:
-      - ${public_port}:${public_port}
+      - 8001:8001
+    labels:
+      io.rancher.scheduler.global: 'true'
 volumes:
   data:
-    driver: ${volume_driver}
+    driver: pxd
   db:
-    driver: ${volume_driver}
+    driver: pxd
