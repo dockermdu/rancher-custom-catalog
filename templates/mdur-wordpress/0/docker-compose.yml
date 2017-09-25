@@ -1,18 +1,18 @@
-wordpress:
-  image: wordpress
-  links:
-    - db:mysql
-  volumes:
-    - ${data_volume}:/var/www/html
-
-db:
-  image: mariadb
-  environment:
-    MYSQL_ROOT_PASSWORD: example
-  volumes:
-    - ${db_volume}:/var/lib/mysql
-    
-lb:
-  image: rancher/lb-service-haproxy
-  ports:
-    - ${public_port}:${public_port}
+version: '2'
+services:
+  wordpress:
+    image: wordpress
+    links:
+      - db:mysql
+    volumes:
+      - ${data_volume}:/var/www/html
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ${db_volume}:/var/lib/mysql
+  lb:
+    image: rancher/lb-service-haproxy
+    ports:
+      - ${public_port}:${public_port}
