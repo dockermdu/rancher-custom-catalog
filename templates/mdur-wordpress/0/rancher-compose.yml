@@ -41,20 +41,19 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   lb:
-    scale: 1
     lb_config:
       certs: []
-      config: |-
-        defaults
-        log 127.0.0.1:8514 local0 debug
-        timeout client 600000
-        timeout server 600000
-        option forwardfor header X-Real-IP
       port_rules:
       - priority: 1
         protocol: http
         service: wordpress
         source_port: ${public_port}
         target_port: 80
+      config: |-
+        defaults
+            log 127.0.0.1:8514 local0 debug
+            timeout client 600000
+            timeout server 600000
+            option forwardfor header X-Real-IP
   wordpress:
     scale: 1

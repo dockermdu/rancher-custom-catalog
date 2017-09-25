@@ -16,3 +16,5 @@ services:
     image: rancher/lb-service-haproxy
     ports:
       - ${public_port}:${public_port}
+    labels:
+      io.rancher.scheduler.global: 'true'
