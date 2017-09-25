@@ -2,8 +2,8 @@ version: '2'
 services:
   wordpress:
     image: 'wpregistry.mdu.com/mdur-wordpress:w4.8v3'
-    depends_on:
-      - db
+    links:
+      - db:mysql
     volumes:
       - 'data:/var/www/html'
   db:
