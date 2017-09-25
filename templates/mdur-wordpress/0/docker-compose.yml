@@ -5,13 +5,13 @@ services:
     links:
       - db:mysql
     volumes:
-      - ${data_volume}:/var/www/html
+      - data:/var/www/html
   db:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: example
     volumes:
-      - ${db_volume}:/var/lib/mysql
+      - db:/var/lib/mysql
   lb:
     image: rancher/lb-service-haproxy
     ports:
