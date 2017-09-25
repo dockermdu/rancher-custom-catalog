@@ -16,5 +16,8 @@ services:
     image: rancher/lb-service-haproxy
     ports:
       - ${public_port}:${public_port}
-    labels:
-      io.rancher.scheduler.global: 'true'
+volumes:
+  data:
+    driver: ${volume_driver}
+  db:
+    driver: ${volume_driver}

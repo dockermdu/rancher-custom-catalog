@@ -17,17 +17,6 @@
       required: true
       default: "pxd"
       type: "string"
-    - variable: data_volume
-      label: "Data Volume"
-      description: "Volume for wordpress data"
-      required: true
-      type: "string"
-    - variable: db_volume
-      label: "DB Volume"
-      description: "Volume for wordpress database"
-      required: true
-      type: "string"
-
 services:
   db:
     scale: 1
