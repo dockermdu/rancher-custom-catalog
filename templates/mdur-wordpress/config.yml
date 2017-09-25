@@ -1,0 +1,5 @@
+name: MDUR Wordpress
+description: |
+  Wordpress stack for mdur architecture
+version: v1.0
+category: Blogging

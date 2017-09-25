@@ -1,0 +1,57 @@
+.catalog:
+  name: "Wordpress"
+  version: "v1.0"
+  description: "Blog tool, publishing platform and CMS"
+  uuid: MDURWordpress-0
+  minimum_rancher_version: v0.51.0
+  questions:    
+    - variable: public_port
+      description: "Public port to access the wordpress site"
+      label: "Public Port"
+      required: true
+      default: "80"
+      type: "int"
+    - variable: volume_driver
+      description: "Volume driver to use with this service"
+      required: true
+      default: "pxd"
+      type: "string"
+    - variable: data_volume
+      description: "Volume for wordpress data"
+      required: true
+      type: "string"
+    - variable: db_volume
+      description: "Volume for wordpress database"
+      required: true
+      type: "string"
+
+services:
+  db:
+    scale: 1
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 3306
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  lb:
+    scale: 1
+    lb_config:
+      certs: []
+      config: |-
+        defaults
+        log 127.0.0.1:8514 local0 debug
+        timeout client 600000
+        timeout server 600000
+        option forwardfor header X-Real-IP
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: wordpress
+        source_port: ${public_port}
+        target_port: 80
+  wordpress:
+    scale: 1
