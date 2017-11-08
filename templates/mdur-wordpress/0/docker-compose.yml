@@ -15,7 +15,7 @@ services:
   lb:
     image: 'rancher/lb-service-haproxy'
     ports:
-      - 8001:8001
+      - ${public_port}:${public_port}
     labels:
       io.rancher.scheduler.global: 'true'
 volumes:
