@@ -43,5 +43,5 @@ services:
       - priority: 1
         protocol: http
         service: wordpress
-        source_port: 8001
+        source_port: ${public_port}
         target_port: 80
